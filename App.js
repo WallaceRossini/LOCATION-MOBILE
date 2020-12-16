@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { Home, Login, Rastreio } from './src/pages';
+import color from './src/styles/colors';
 
 export default function App() {
 
@@ -17,16 +18,16 @@ export default function App() {
           options={{
             title: "Bem-vindo",
             headerStyle:{
-              backgroundColor:"#5D9CEC",
+              backgroundColor: color.info,
             },
-            headerTintColor: "#41414D",
+            headerTintColor: color.dark,
             headerTitleStyle: {
               fontWeight: 'bold',
               alignSelf: 'center'
             }
           }}
         />
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
         <Stack.Screen name="Rastreio" component={Rastreio} />
         {/* <Stack.Screen name="AreaRestrita" component={AreaRestrita} /> */}
       </Stack.Navigator>
