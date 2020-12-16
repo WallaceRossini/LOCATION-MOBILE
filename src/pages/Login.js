@@ -1,10 +1,10 @@
 import React from 'react'
 import { Button, Text, View } from 'react-native';
 
-export default function Login({route}) {
+export default function Login() {
   return (
    <View>
-     <Text>Login id:{route.params.id}</Text>
+     <Text>Login</Text>
    </View>
   )
 }

@@ -8,6 +8,16 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  container_2: {
+    flex: 1,
+    flexDirection:'row',
+    backgroundColor: '#FFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  btn_home:{
+    margin:20
+  },
   textPage: {
     backgroundColor:'orange',
     padding:20,
