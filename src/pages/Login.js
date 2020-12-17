@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Image, KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native';
+
+import * as LocalAuthentication from 'expo-local-authentication';
 
 import logomarca from '../../assets/logomarca.png';
 
@@ -12,9 +14,54 @@ export default function Login({navigation}) {
   const [email, setEmail] = useState(null);
   const [msg, setMsg] = useState(null);
   const [password, setPassword] = useState(null);
-  const [login, setLogin] = useState(null);
+  const [login, setLogin] = useState(false);
+
+  // Verificar se user já possui 1 log_in
+
+  useEffect(() => {
+    vefifyLogIn();
+  },[]);
+
+  useEffect(() => {
+    if(login === true){
+      biometric();
+    }
+  },[login]);
+
+  async function vefifyLogIn(){
+    let response = await AsyncStorage.getItem('user');
+    let json = await JSON.parse(response);
+
+    if(json !== null){
+      setEmail(json.email);
+      setPassword(json.password);
+      setLogin(true);
+    }
+  }
+
+  // Biometria
+  async function biometric(){
+    let compatible = await LocalAuthentication.hasHardwareAsync();
+
+    if(compatible){
+      let biometricRecords = await LocalAuthentication.isEnrolledAsync();
+      if(!biometricRecords){
+        alert('Biometria não cadastrada');
+      }else{
+        let result = await LocalAuthentication.authenticateAsync();
+        if(result.success){
+          sendForm();
+        }else{
+          setEmail(null);
+          setPassword(null);
+        }
+      }
+    }
+  }
+
 
   async function sendForm(){
+
     let response = await fetch('http://devrossiniwallace.com.br/auth/log_in',{
       method: 'POST',
       headers: {
