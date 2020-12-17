@@ -62,5 +62,11 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 22,
     color: color.dark
+  },
+  tab:{
+    backgroundColor:color.dark,
+    fontSize: 20,
+    fontWeight:'bold',
+    color:color.white
   }
 });
