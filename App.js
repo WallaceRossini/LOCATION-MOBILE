@@ -2,7 +2,9 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { Home, Login, Rastreio, Area_Restrita} from './src/pages';
+import { Home, Login, Rastreio } from './src/pages';
+import Area_Restrita from './src/pages/auth/AreaRestrita';
+
 import color from './src/styles/colors';
 
 export default function App() {
@@ -29,7 +31,13 @@ export default function App() {
         />
         <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
         <Stack.Screen name="Rastreio" component={Rastreio} />
-        <Stack.Screen name="AreaRestrita" component={Area_Restrita} />
+        <Stack.Screen 
+        name="AreaRestrita" 
+        component={Area_Restrita}
+        options={{
+          headerShown: false
+        }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

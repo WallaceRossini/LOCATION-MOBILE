@@ -4,9 +4,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Feather } from '@expo/vector-icons';
 
-import { Profile, Cadastro, Edicao } from './index';
-import color from '../styles/colors';
-import styles from '../styles/styles';
+import { Profile, Cadastro, Edicao } from '../index';
+import color from '../../styles/colors';
+import styles from '../../styles/styles';
 
 export default function Area_Restrita() {
 

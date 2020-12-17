@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Text, View } from 'react-native';
+import styles from '../styles/styles';
 
-export default function Cadastro() {
+import Menu from '../components/Menu';
+
+export default function Cadastro({navigation}) {
 
   return (
-    <View>
-      <Text>Cadastro</Text>
+    <View style={[styles.container,{justifyContent:"flex-start"}]}>
+      <Menu title="Cadastro" navigation={navigation}/>
     </View>
-  )
+  );
 }

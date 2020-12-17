@@ -68,5 +68,27 @@ export default StyleSheet.create({
     fontSize: 20,
     fontWeight:'bold',
     color:color.white
+  },
+  menu:{
+    flexDirection:'row',
+    paddingTop:40,
+    paddingBottom: 10,
+    width:'100%',
+    backgroundColor:color.info,
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  btn__home:{
+    textAlign:'left'
+  },
+  title:{
+    width:'80%',
+    fontWeight:'bold',
+    fontSize:20,
+    color:color.dark,
+    textAlign:'center'
+  },
+  btn__logout:{
+    textAlign:'right'
   }
 });

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Text, View } from 'react-native';
+import { TouchableOpacity, Text, View } from 'react-native';
+import styles from '../styles/styles';
 
-export default function Profile() {
+import Menu from '../components/Menu';
+
+export default function Profile({navigation}) {
 
   return (
-    <View>
-      <Text>Profile</Text>
+    <View style={[styles.container,{justifyContent:"flex-start"}]}>
+      <Menu title="Perfil" navigation={navigation}/>
     </View>
-  )
+  );
 }
