@@ -76,8 +76,6 @@ export default function Login({navigation}) {
 
     let json = await response.json();
 
-    console.log(json);
-
     if(json === false){
       setDisplay('flex');
       setTimeout(() => {
