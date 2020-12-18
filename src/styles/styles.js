@@ -90,5 +90,17 @@ export default StyleSheet.create({
   },
   btn__logout:{
     textAlign:'right'
-  }
+  },
+  qr_code:(display="flex")=>({
+    width:'100%',
+    height:'100%',
+    backgroundColor:color.dark,
+    justifyContent:'center',
+    display: display
+  }),
+  qr_form:(display="none")=>({
+    width:'100%',
+    display: display
+  }),
+
 });

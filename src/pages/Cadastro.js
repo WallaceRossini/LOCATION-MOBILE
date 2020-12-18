@@ -11,8 +11,8 @@ import color from '../styles/colors';
 export default function Cadastro({ navigation }) {
 
   const address = 'Av. Paulista, 200 - São Paulo / SP';
-  const [code, setCode] = useState(null);
   const [user, setUser] = useState(null);
+  const [code, setCode] = useState(null);
   const [product, setProduct] = useState(null);
   const[response,setResponse] = useState(null);
   useEffect(()=>{
@@ -69,8 +69,6 @@ export default function Cadastro({ navigation }) {
     })
 
     let json = await response.json();
-
-    console.log(json);
 
     setResponse(json);
   }
