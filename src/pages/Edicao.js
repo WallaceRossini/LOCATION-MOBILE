@@ -28,7 +28,26 @@ export default function Edicao({ navigation }) {
     setDisplayQR('none');
     setDisplayForm('flex');
     setCode(data);
+    await search_code(data);
   };
+
+  async function search_code(code){
+
+    let response = await fetch (`http:devrossiniwallace.com.br/tracking/${code}`,{
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type':'application/json'
+      }
+    })
+
+
+    let json = await response.json();
+
+    setProduct(json.name);
+    setLocal(json.local);
+
+  }
 
   async function sendForm(){
 
