@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Text, View } from 'react-native';
+import { Button, Text, View, BackHandler, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Feather } from '@expo/vector-icons';
@@ -8,7 +8,7 @@ import { Profile, Cadastro, Edicao } from '../index';
 import color from '../../styles/colors';
 import styles from '../../styles/styles';
 
-export default function Area_Restrita() {
+export default function Area_Restrita({navigation}) {
 
   const [user, setUser] = useState(null);
   const Tab = createMaterialBottomTabNavigator();
@@ -21,6 +21,31 @@ export default function Area_Restrita() {
       setUser(json.name);
     }
     getUser();
+  }, []);
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert("Alerta!", "Deseja mesmo sair do app ?", [
+        {
+          text: "Não",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "Sim", onPress: () => {
+          navigation.navigate('Home');
+          BackHandler.exitApp() 
+        }
+        }
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
   }, []);
 
   return (
