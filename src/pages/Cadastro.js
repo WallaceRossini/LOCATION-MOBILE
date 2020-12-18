@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import * as FileSystem from 'expo-file-system';
+import * as Sharing from 'expo-sharing';
 import { Button, Text, View, Image ,TextInput, TouchableOpacity} from 'react-native';
 import Menu from '../components/Menu';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -39,6 +41,19 @@ export default function Cadastro({ navigation }) {
     setCode(result);
   }
 
+  async function shareQR(){
+    const image = 'http://devrossiniwallace.com.br/assets/code.png';
+
+    FileSystem.downloadAsync(
+      image,
+      FileSystem.documentDirectory+".png"
+    ).then(({uri}) => {
+      Sharing.shareAsync(uri);
+    })
+
+    await Sharing.shareAsync();
+  }
+
   async function sendForm(){
     let response = await fetch(`http://devrossiniwallace.com.br/users/${user}/tracking`,{
       method: 'POST',
@@ -67,7 +82,7 @@ export default function Cadastro({ navigation }) {
         response && (
           <View>
             <Image source={{uri: response, height:180,width:180}}/> 
-            <Button title="Compartilhar"/>
+            <Button title="Compartilhar" onPress={()=>shareQR()}/>
           </View>
         )
       }
