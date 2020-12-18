@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Text, View ,TextInput, TouchableOpacity} from 'react-native';
+import { Button, Text, View, Image ,TextInput, TouchableOpacity} from 'react-native';
 import Menu from '../components/Menu';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -12,15 +12,15 @@ export default function Cadastro({ navigation }) {
   const [code, setCode] = useState(null);
   const [user, setUser] = useState(null);
   const [product, setProduct] = useState(null);
-  const [response, setResponse] = useState(null);
-
+  const[response,setResponse] = useState(null);
   useEffect(()=>{
     getUser();
   },[]);
 
   useEffect(()=>{
     randomCode();
-  },[]);
+    setProduct(null);
+  },[response]);
 
   async function getUser(){
     let response = await AsyncStorage.getItem('user');
@@ -52,13 +52,27 @@ export default function Cadastro({ navigation }) {
         name: product
       })
     })
+
+    let json = await response.json();
+
+    console.log(json);
+
+    setResponse(json);
   }
 
   return (
-    <View style={[styles.container, { justifyContent: "flex-start" }]}>
+    <View style={[styles.container,{ justifyContent: "flex-start" }]}>
       <Menu title="Cadastro" navigation={navigation} />
+      {
+        response && (
+          <View>
+            <Image source={{uri: response, height:180,width:180}}/> 
+            <Button title="Compartilhar"/>
+          </View>
+        )
+      }
       <View style={styles.login_input}>
-        <TextInput placeholder="Nome do Produto" onChangeText={text => setProduct(text)}/>
+        <TextInput value={product} placeholder="Nome do Produto" onChangeText={text => setProduct(text)}/>
       </View>
       <TouchableOpacity style={styles.login_btn} onPress={()=>sendForm()}>
         <Text style={styles.login_btn_text}>Cadastrar</Text>
